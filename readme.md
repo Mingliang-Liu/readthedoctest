@@ -1,10 +1,10 @@
 # ReadTheDocs Test
 
 ## 新建github仓库
-新建了readthedoctest的公开仓库
-.gitignore选Python
-LICENSE选GPLv3
-不初始化readme.md
+- 新建readthedoctest的公开仓库
+- .gitignore选Python
+- LICENSE选GPLv3
+- 不初始化readme.md
 ```
 git clone https://github.com/Mingliang-Liu/readthedoctest.git
 ```
@@ -130,4 +130,42 @@ dumping object inventory... done
 build succeeded.
 
 The HTML pages are in build/html.
+```
+
+## vscode安装live sever
+安装后打开build/html/index.html右下角Go live可预览
+
+## ReadTheDocs要求
+ReadTheDocs要求仓库里必须有.readthedocs.yaml
+```
+# Read the Docs configuration file
+# See https://docs.readthedocs.io/en/stable/config-file/v2.html for details
+
+# Required
+version: 2
+
+# Set the OS, Python version, and other tools you might need
+build:
+  os: ubuntu-22.04
+  tools:
+    python: "3.10"
+
+# Build documentation in the "docs/" directory with Sphinx
+sphinx:
+   configuration: docs/conf.py
+
+# Optionally, but recommended,
+# declare the Python requirements required to build your documentation
+# See https://docs.readthedocs.io/en/stable/guides/reproducible-builds.html
+python:
+   install:
+   - requirements: requirements.txt
+```
+
+requirements.txt
+```
+sphinx==8.1.3
+shibuya==2026.1.9
+recommonmark==0.7.1
+sphinx_markdown_tables==0.0.17
 ```
