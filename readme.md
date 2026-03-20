@@ -152,7 +152,7 @@ build:
 
 # Build documentation in the "docs/" directory with Sphinx
 sphinx:
-   configuration: docs/conf.py
+   configuration: source/conf.py
 
 # Optionally, but recommended,
 # declare the Python requirements required to build your documentation
@@ -169,3 +169,91 @@ shibuya==2026.1.9
 recommonmark==0.7.1
 sphinx_markdown_tables==0.0.17
 ```
+
+## 注册ReadTheDocs
+https://readthedocs.org/
+
+使用github账号登录
+
+## ReadTheDocs操作
+- 1. Add projects
+- 2. Repository name:readthedoctest
+- 3. 搜不到点Repair -> Update Github App Installation -> install
+- 4. 名称是未来网址的前缀，且后面不可修改 例如readthedoctest被占用了，取名readthedoctest2026，后续readthedoctest2026.readthedocs.io就是文档网址
+- 5. ReadTheDocs会自动build
+
+## 成果网址
+readthedoctest2026.readthedocs.io
+
+
+## 增加讨论
+https://giscus.app/zh-CN
+
+将以下添加到rst中
+```
+.. raw:: html
+
+    <div id="giscus_container" style="margin-top: 50px;"></div>
+
+    <script src="https://giscus.app/client.js"
+        data-repo="Mingliang-Liu/readthedoctest"
+        data-repo-id="R_kgDORrEgmQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDORrEgmc4C4wu9"
+        data-mapping="title"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="up"
+        data-theme="light"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+    </script>
+
+    <script>
+      function updateGiscusTheme() {
+         const theme = document.documentElement.getAttribute("data-color-mode");
+         const giscusFrame = document.querySelector("iframe.giscus-frame");
+
+         if (!giscusFrame) return;
+
+         giscusFrame.contentWindow.postMessage({
+                  giscus: {
+                     setConfig: {
+                           theme: theme === "dark" ? "dark" : "light"
+                     }
+                  }
+               },
+               "https://giscus.app"
+         );
+      }
+
+      // 初始执行
+      window.addEventListener("load", updateGiscusTheme);
+
+      // 监听主题切换（关键）
+      const observer = new MutationObserver(updateGiscusTheme);
+      observer.observe(document.documentElement, {
+         attributes: true,
+         attributeFilter: ["data-color-mode"]
+      });
+    </script>
+
+```
+
+## rst语法
+```
+语法如下：
+两个点..+空格+后面的文本，代表注释
+等号线====+上一行的文本，代表一级标题
+.. toctree::声明的一个树状结构
+:maxdepth: 2 表示页面的级数最多显示两级
+:caption: Contents: 用于指定标题文本
+最下面的3行是索引和搜索链接
+```
+
+## 参考
+- https://docs.readthedocs.com/platform/stable/tutorial/index.html
+- https://zhuanlan.zhihu.com/p/388640347
+- https://www.sphinx-doc.org/zh-cn/master/usage/restructuredtext/basics.html
